@@ -148,7 +148,9 @@ def _parse_record(data, duration_format='seconds'):
     """
     Parse a raw data dictionary and return a Record object.
     """
-
+    if 'country_code' in data:
+        print("Data:")
+        print(data)
     def _map_duration(s):
         if s == '':
             return None
@@ -184,7 +186,7 @@ def _parse_record(data, duration_format='seconds'):
 
         return antenna
 
-    return Record(interaction=data['interaction'] if data['interaction'] else None,
+    record =  Record(interaction=data['interaction'] if data['interaction'] else None,
                   direction=data['direction'],
                   country_code=data['country_code'] if 'country_code' in data else None,
                   correspondent_id=data['correspondent_id'],
@@ -193,6 +195,10 @@ def _parse_record(data, duration_format='seconds'):
                       data['datetime']),
                   call_duration=_tryto(_map_duration, data['call_duration']),
                   position=_tryto(_map_position, data))
+    if 'country_code' in data:
+        print("Record:")
+        print(record)
+    return record
 
 
 def _parse_recharge(data):
@@ -576,6 +582,8 @@ def read_csv(user_id, records_path, antennas_path=None, attributes_path=None,
     with open(user_records, 'r') as csv_file:
         reader = csv.DictReader(csv_file)
         records = [_parse_record(r, duration_format) for r in reader]
+
+    print("Records length:" + str(len(records)))
 
     attributes = None
     if attributes_path is not None:
