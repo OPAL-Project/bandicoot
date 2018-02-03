@@ -20,6 +20,7 @@ nosetests.html
 *.so
 
 # Distribution / packaging
+.idea
 .Python
 env/
 bin/

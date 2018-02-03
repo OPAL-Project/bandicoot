@@ -179,6 +179,7 @@ def _parse_record(data, duration_format='seconds'):
 
     return Record(interaction=data['interaction'] if data['interaction'] else None,
                   direction=data['direction'],
+                  country_code=data['country_code'] if 'country_code' in data else None,
                   correspondent_id=data['correspondent_id'],
                   datetime=_tryto(
                       lambda x: datetime.strptime(x, "%Y-%m-%d %H:%M:%S"),

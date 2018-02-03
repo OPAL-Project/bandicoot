@@ -98,9 +98,9 @@ class TestGroup(unittest.TestCase):
 
     def test_weekly_group(self):
         records = [
-            Record("test_itr", "in", "1", dt(2014, 8, 24), 1, Position()),
-            Record("test_itr", "in", "1", dt(2014, 9, 4), 1, Position()),
-            Record("test_itr", "in", "1", dt(2014, 9, 11), 1, Position())
+            Record("test_itr", "in", "1", "1", dt(2014, 8, 24), 1, Position()),
+            Record("test_itr", "in", "1", "1", dt(2014, 9, 4), 1, Position()),
+            Record("test_itr", "in", "1", "1", dt(2014, 9, 11), 1, Position())
         ]
         user = bc.User()
         user.records = records
@@ -111,9 +111,9 @@ class TestGroup(unittest.TestCase):
 
     def test_weekday_filter(self):
         records = [
-            Record("test_itr", "in", "1", dt(2014, 8, 22), 1, Position()),
-            Record("test_itr", "in", "1", dt(2014, 8, 31), 1, Position()),
-            Record("test_itr", "in", "1", dt(2014, 10, 18), 1, Position())
+            Record("test_itr", "in", "1", "1", dt(2014, 8, 22), 1, Position()),
+            Record("test_itr", "in", "1", "1", dt(2014, 8, 31), 1, Position()),
+            Record("test_itr", "in", "1", "1", dt(2014, 10, 18), 1, Position())
         ]
         user = bc.User()
         user.records = records
@@ -122,9 +122,9 @@ class TestGroup(unittest.TestCase):
 
     def test_weekend_filter(self):
         records = [
-            Record("test_itr", "in", "1", dt(2014, 8, 22), 1, Position()),
-            Record("test_itr", "in", "1", dt(2014, 8, 31), 1, Position()),
-            Record("test_itr", "in", "1", dt(2014, 10, 18), 1, Position())
+            Record("test_itr", "in", "1", "1", dt(2014, 8, 22), 1, Position()),
+            Record("test_itr", "in", "1", "1", dt(2014, 8, 31), 1, Position()),
+            Record("test_itr", "in", "1", "1", dt(2014, 10, 18), 1, Position())
         ]
         user = bc.User()
         user.records = records
@@ -133,13 +133,13 @@ class TestGroup(unittest.TestCase):
 
     def test_daily_filter(self):
         records = [
-            Record("test_itr", "in", "1",
+            Record("test_itr", "in", "1", "1",
                    dt(2014, 8, 22, 10, 00), 1, Position()),
-            Record("test_itr", "in", "1",
+            Record("test_itr", "in", "1", "1",
                    dt(2014, 8, 23, 10, 00), 1, Position()),
-            Record("test_itr", "in", "1",
+            Record("test_itr", "in", "1", "1",
                    dt(2014, 9, 7, 11, 00), 1, Position()),
-            Record("test_itr", "in", "1",
+            Record("test_itr", "in", "1", "1",
                    dt(2014, 10, 18, 2, 00), 1, Position())
         ]
         user = bc.User()
@@ -153,10 +153,10 @@ class TestGroup(unittest.TestCase):
 
     def test_none_group(self):
         records = [
-            Record("call", "in", "1", dt(2014, 9, 4), 1, Position()),
-            Record("call", "in", "1", dt(2014, 9, 5), 1, Position()),
-            Record("call", "in", "1", dt(2014, 9, 11), 1, Position()),
-            Record("call", "in", "1", dt(2014, 9, 12), 1, Position())
+            Record("call", "in", "1", "1", dt(2014, 9, 4), 1, Position()),
+            Record("call", "in", "1", "1", dt(2014, 9, 5), 1, Position()),
+            Record("call", "in", "1", "1", dt(2014, 9, 11), 1, Position()),
+            Record("call", "in", "1", "1", dt(2014, 9, 12), 1, Position())
         ]
 
         grouping = bc.helper.group.group_records(records, groupby=None)

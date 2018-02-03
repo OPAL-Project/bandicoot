@@ -49,13 +49,14 @@ class Record(object):
     position : Position
         The geographic position of the user at the time of the interaction.
     """
-    __slots__ = ['interaction', 'direction', 'correspondent_id',
+    __slots__ = ['interaction', 'direction','country_code', 'correspondent_id',
                  'datetime', 'call_duration', 'position']
 
-    def __init__(self, interaction=None, direction=None, correspondent_id=None,
+    def __init__(self, interaction=None, direction=None, country_code=None, correspondent_id=None,
                  datetime=None, call_duration=None, position=None):
         self.interaction = interaction
         self.direction = direction
+        self.country_code = country_code
         self.correspondent_id = correspondent_id
         self.datetime = datetime
         self.call_duration = call_duration

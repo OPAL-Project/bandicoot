@@ -262,7 +262,7 @@ def _transform_to_time_spent(records, split_interval, sections):
             if dt_new.isocalendar()[1] > week_nr:
                 dt_new -= dt.timedelta(days=7)
             t_records.append(
-                Record('call', r.direction, None, dt_new, t_spent, None))
+                Record('call', r.direction, None, None, dt_new, t_spent, None))
 
             t_left -= t_spent
             t_spent_total += t_spent
