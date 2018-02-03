@@ -105,11 +105,13 @@ class Position(object):
         A tuple (lat, lon) with the latitude and longitude of the antenna,
         encoded as floating point numbers.
     """
-    __slots__ = ['antenna', 'location']
+    __slots__ = ['antenna', 'location', 'location_level_1', 'location_level_2']
 
-    def __init__(self, antenna=None, location=None):
+    def __init__(self, antenna=None, location=None, location_level_1=None, location_level_2=None):
         self.antenna = antenna
         self.location = location
+        self.location_level_1 = location_level_1
+        self.location_level_2 = location_level_2
 
     def _get_location(self, user):
         if self.location:

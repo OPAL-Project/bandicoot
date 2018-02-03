@@ -175,6 +175,13 @@ def _parse_record(data, duration_format='seconds'):
             if latitude and longitude:
                 antenna.location = float(latitude), float(longitude)
 
+        if 'location_level_1' in data and 'location_level_2' in data:
+            location_level_1 = data['location_level_1']
+            location_level_2 = data['location_level_2']
+            if location_level_1 and location_level_2:
+                antenna.location_level_1 = location_level_1
+                antenna.location_level_2 = location_level_2
+
         return antenna
 
     return Record(interaction=data['interaction'] if data['interaction'] else None,
