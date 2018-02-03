@@ -51,6 +51,15 @@ class TestParsers(unittest.TestCase):
     def test_read_csv(self):
         user = bc.read_csv("u_test2", "samples", describe=False)
         self.assertEqual(len(user.records), 500)
+        self.assertEqual(user.records[1],
+                         Record(interaction='call',
+                                direction='in',
+                                country_code=1,
+                                correspondent_id='770000001',
+                                datetime=dt(2013, 12, 16, 5, 39, 30),
+                                call_duration=0,
+                                position=Position(location=(42.6783, -71.1139),
+                                                  location_level_1='A', location_level_2='B')))
 
     def test_read_csv_with_recharges(self):
         user = bc.read_csv("A", "samples/manual", describe=False,

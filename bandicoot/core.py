@@ -132,8 +132,9 @@ class Position(object):
             return "Position(antenna=%s, location=%s)" % (self.antenna, self.location)
         if self.antenna:
             return "Position(antenna=%s)" % self.antenna
-        if self.location:
-            return "Position(location=(%s, %s))" % self.location
+        if self.location and self.location_level_1 and self.location_level_2:
+            return "Position(location=%s, location_level_1=%s, location_level_2=%s)" % \
+                   (self.location, self.location_level_1, self.location_level_2)
 
         return "Position()"
 
