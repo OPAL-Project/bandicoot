@@ -54,7 +54,7 @@ class TestParsers(unittest.TestCase):
         self.assertEqual(user.records[1],
                          Record(interaction='call',
                                 direction='in',
-                                country_code=1,
+                                country_code='1',
                                 correspondent_id='770000001',
                                 datetime=dt(2013, 12, 16, 5, 39, 30),
                                 call_duration=0,
@@ -71,10 +71,11 @@ class TestParsers(unittest.TestCase):
         self.assertEqual(user.records[1],
                          Record(interaction='call',
                                 direction='in',
+                                country_code='1',
                                 correspondent_id='770000001',
                                 datetime=dt(2013, 12, 16, 5, 39, 30),
                                 call_duration=0,
-                                position=Position('13084', None)))
+                                position=Position('13084', None, 'A', 'B')))
 
         result = {'allweek': {'allday': None}}
         radius = bc.spatial.radius_of_gyration(user, groupby=None)
@@ -87,10 +88,11 @@ class TestParsers(unittest.TestCase):
         self.assertEqual(user.records[1],
                          Record(interaction='call',
                                 direction='in',
+                                country_code='1',
                                 correspondent_id='770000001',
                                 datetime=dt(2013, 12, 16, 5, 39, 30),
                                 call_duration=0,
-                                position=Position('13084', None)))
+                                position=Position('13084', None, 'A', 'B')))
 
         radius = bc.spatial.radius_of_gyration(user, groupby=None)
         self.assertGreater(radius['allweek']['allday'], 0)

@@ -132,6 +132,11 @@ class Position(object):
             return "Position(antenna=%s, location=%s)" % (self.antenna, self.location)
         if self.antenna:
             return "Position(antenna=%s)" % self.antenna
+        if self.antenna and self.location_level_1 and self.location_level_2:
+            return "Position(antenna=%s, location_level_1=%s, location_level_2=%s)" % \
+                   (self.antenna, self.location_level_1, self.location_level_2)
+        if self.location:
+            return "Position(location=%s)"
         if self.location and self.location_level_1 and self.location_level_2:
             return "Position(location=%s, location_level_1=%s, location_level_2=%s)" % \
                    (self.location, self.location_level_1, self.location_level_2)
@@ -140,6 +145,9 @@ class Position(object):
 
     def __eq__(self, other):
         if not isinstance(other, Position):
+            return False
+        if self.location_level_1 != other.location_level_1 or self.location_level_2 != \
+                other.location_level_2:
             return False
         if self.antenna and other.antenna:
             return self.antenna == other.antenna
