@@ -29,6 +29,7 @@ from bandicoot.core import Record, Position
 from datetime import datetime as dt
 import unittest
 import os
+import operator
 
 
 class TestParsers(unittest.TestCase):
@@ -142,3 +143,19 @@ class TestParsers(unittest.TestCase):
         raw['call_duration'] = ''
         rv = bc.io._parse_record(raw, duration_format='seconds').call_duration
         self.assertEqual(rv, None)
+
+    def test_read_opal(self):
+        user = bc.read_csv("opal_data", "samples", describe=False)
+
+        antennas = dict()
+
+        for record in user.records:
+            if record.datetime:
+                a = record.position.antenna
+                if a in antennas:
+                    antennas[a] += 1
+                else:
+                    antennas[a] = 1
+        antenna = max(antennas.items(), key=operator.itemgetter(1))[0]
+
+        self.assertEquals(antenna, '88')
