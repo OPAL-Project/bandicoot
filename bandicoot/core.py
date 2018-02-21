@@ -128,20 +128,20 @@ class Position(object):
             return 'gps'
 
     def __repr__(self):
-        if self.antenna and self.location:
-            return "Position(antenna=%s, location=%s)" % (self.antenna, self.location)
+        result = "Position("
         if self.antenna:
-            return "Position(antenna=%s)" % self.antenna
-        if self.antenna and self.location_level_1 and self.location_level_2:
-            return "Position(antenna=%s, location_level_1=%s, location_level_2=%s)" % \
-                   (self.antenna, self.location_level_1, self.location_level_2)
+            result += "antenna={}, ".format(self.antenna)
         if self.location:
-            return "Position(location=%s)"
-        if self.location and self.location_level_1 and self.location_level_2:
-            return "Position(location=%s, location_level_1=%s, location_level_2=%s)" % \
-                   (self.location, self.location_level_1, self.location_level_2)
+            result += "location={}, ".format(self.location)
+        if self.location_level_1:
+            result += "location_level_1={}, ".format(self.location_level_1)
+        if self.location_level_2:
+            result += "location_level_2={}".format(self.location_level_2)
+        if result[-1] == " ":
+            result = result[:-2]
+        result += ")"
 
-        return "Position()"
+        return result
 
     def __eq__(self, other):
         if not isinstance(other, Position):
@@ -376,10 +376,11 @@ class User(object):
         else:
             print(empty_box + "No network")
 
-    def recompute_home(self):
+    def recompute_home(self, aggregation_level='antenna'):
         """
-        Return the antenna where the user spends most of his time at night.
+        Return the place where the user spends most of his time at night based on aggregation level.
         None is returned if there are no candidates for a home antenna
+        aggregation_level can be: 'antenna', 'commune', 'region'
         """
 
         if self.night_start < self.night_end:
@@ -396,7 +397,13 @@ class User(object):
         if len(candidates) == 0:
             self.home = None
         else:
-            self.home = Counter(candidates).most_common()[0][0]
+            home_position = Counter(candidates).most_common()[0][0]
+            if aggregation_level == 'antenna':
+                self.home = home_position
+            elif aggregation_level == 'commune':
+                self.home = home_position.location_level_1
+            else:
+                self.home = home_position.location_level_2
 
         self.reset_cache()
         return self.home

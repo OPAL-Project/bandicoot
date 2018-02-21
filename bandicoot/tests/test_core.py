@@ -67,6 +67,14 @@ class TestCore(unittest.TestCase):
         self.assertEqual(old_home, new_home)
         self.assertEqual(old_home, self.user.home)
 
+    def test_recompute_home_with_aggregation(self):
+        user = bc.io.read_csv("opal_data", "samples", describe=False)
+        home_commune = user.recompute_home('location_level_1')
+        home_region = user.recompute_home('location_level_2')
+
+        self.assertEqual(home_commune, 'Mumbai')
+        self.assertEqual(home_region, 'Mumbai')
+
     def test_set_home(self):
         towers = parse_dict("samples/towers.json")
         towers = {key: tuple(value) for (key, value) in towers.items()}

@@ -146,7 +146,6 @@ class TestParsers(unittest.TestCase):
 
     def test_read_opal(self):
         user = bc.read_csv("opal_data", "samples", describe=False)
-
         antennas = dict()
 
         for record in user.records:
