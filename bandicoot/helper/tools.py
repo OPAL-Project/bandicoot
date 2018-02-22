@@ -238,8 +238,16 @@ def antennas_missing_locations(user, Method=None):
     """
     Return the number of antennas missing locations in the records of a given user.
     """
+    # If the location information is contained already in the records, return 0
+    locations = [record.position.location for record in user.records
+                           if record.position.location is not None]
+    if len(locations) > 0:
+        return 0
+
+    # Otherwise, check how many antenna don't have a location in the separate file
     unique_antennas = set([record.position.antenna for record in user.records
                            if record.position.antenna is not None])
+
     return sum([1 for antenna in unique_antennas if user.antennas.get(antenna) is None])
 
 
